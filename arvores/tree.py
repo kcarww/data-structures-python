@@ -54,6 +54,8 @@ class BinaryTree:
         if lheight > rheight:
             return lheight + 1
         return rheight + 1
+
+    # Percurso em nível
     def levelorder_traversal(self, node=ROOT):
         if node == ROOT:
             node = self.root
