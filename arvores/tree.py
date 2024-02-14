@@ -1,4 +1,3 @@
-# Percurso em ordem simetrica
 class Node:
     def __init__(self, data):
         self.data = data
@@ -17,6 +16,7 @@ class BinaryTree:
         else:
             self.root = None
 
+    # Percurso em ordem simetrica
     def simetric_traversal(self, node=None):
         if node is None:
             node = self.root
