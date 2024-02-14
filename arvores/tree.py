@@ -9,8 +9,10 @@ class Node:
 
 
 class BinaryTree:
-    def __init__(self, data=None):
-        if data:
+    def __init__(self, data=None, node=None):
+        if node:
+            self.root = node
+        elif data:
             node = Node(data)
             self.root = node
         else:
@@ -36,7 +38,7 @@ class BinaryTree:
             self.postorder_traversal(node.right)
         print(node, end='')
 
-    # Obtendo a altura de uma árvore
+    # Determinando a altura de uma árvore
     def height(self, node=None):
         if node is None:
             node = self.root
@@ -50,8 +52,43 @@ class BinaryTree:
             return lheight + 1
         return rheight + 1
 
-if __name__ == "__main__":
-    tree = BinaryTree(7)
-    tree.root.left = Node(3)
-    tree.root.right = Node(15)
-    print(tree.root)
+
+class BinarySearchTree(BinaryTree):
+    # Inserindo em uma árvore binária de busca
+    def insert(self, value):
+        parent = None
+        x = self.root
+        while x:
+            parent = x
+            if value < x.data:
+                x = x.left
+            else:
+                x = x.right
+        if parent is None:
+            self.root = Node(value)
+        elif value < parent.data:
+            parent.left = Node(value)
+        else:
+            parent.right = Node(value)
+
+    
+    def inorder_traversal(self, node=None):
+        if node is None:
+            node = self.root
+        if node.left:
+            self.inorder_traversal(node.left)
+        print(node, end=' ')
+        if node.right:
+            self.inorder_traversal(node.right)
+
+    # Realizando buscas em uma árvore binária de buscas
+    def search(self, value, node=0):
+        if node == 0:
+            node = self.root
+        if node is None:
+            return node
+        if node.data == value:
+            return BinarySearchTree(node)
+        if value < node.data:
+            return self.search(value, node.left)
+        return self.search(value, node.right)
