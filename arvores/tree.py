@@ -26,6 +26,30 @@ class BinaryTree:
         if node.right:
             self.simetric_traversal(node.right)
 
+    # Percurso em pós ordem
+    def postorder_traversal(self, node=None):
+        if node is None:
+            node = self.root
+        if node.left:
+            self.postorder_traversal(node.left)
+        if node.right:
+            self.postorder_traversal(node.right)
+        print(node, end='')
+
+    # Obtendo a altura de uma árvore
+    def height(self, node=None):
+        if node is None:
+            node = self.root
+        lheight = 0
+        rheight = 0
+        if node.left:
+            lheight = self.height(node.left)
+        if node.right:
+            rheight = self.height(node.right)
+        if lheight > rheight:
+            return lheight + 1
+        return rheight + 1
+
 if __name__ == "__main__":
     tree = BinaryTree(7)
     tree.root.left = Node(3)
